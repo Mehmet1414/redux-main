@@ -1,17 +1,32 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import SingelTodo from './SingelTodo';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SingelTodo from "./SingelTodo";
+
 function ListTodos() {
-  const {todoState} = useSelector((state)=> state);
+  const { todoState } = useSelector((state) => state);
 
   //console.log(todoState.todos)
+  const dispatch = useDispatch()
+  const handleClear = ()=>{
+    dispatch({
+      type:"CLEAR",
+    })
+  }
+
   return (
-    <div className='d-flex gap-5 p-4 '>
-        {todoState.todos.map((todo)=>(
-            <SingelTodo todo={todo} />
-        ))}
+    <div className="row justify-content-center gap-5 p-4 pt-0 ">
+      <div className="">
+        {todoState.todos.length >=1 ? (
+          <a href="#" onClick={handleClear}>Bütün Listeyi Sil</a>
+        ) : (
+          "Listeleneck Öge yok..."
+        )}
+      </div>
+      {todoState.todos.map((todo) => (
+        <SingelTodo todo={todo} />
+      ))}
     </div>
-  )
+  );
 }
 
-export default ListTodos
+export default ListTodos;
