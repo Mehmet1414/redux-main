@@ -11,7 +11,6 @@ const todoReducer = (state = initialState, action) => {
 
     case "DEL_TODO":
       const filtredTodos = state.todos.filter((e) => e.id !== action.payload);
-      console.log(filtredTodos);
       return {
         todos: filtredTodos,
       };

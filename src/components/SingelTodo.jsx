@@ -16,15 +16,17 @@ function SingelTodo({ todo }) {
   };
 
   const handleEdit = () => {
-    axios.put(`http://localhost:3003/todos/${todo.id}`,{...todo, isDone:!todo.isDone })
-    .then(()=>{
-      dispatch({
-        type: "EDIT_TODO",
-        payload: todo.id,
+    axios
+      .put(`http://localhost:3003/todos/${todo.id}`, {
+        ...todo,
+        isDone: !todo.isDone,
+      })
+      .then(() => {
+        dispatch({
+          type: "EDIT_TODO",
+          payload: todo.id,
+        });
       });
-
-    })
-
   };
 
   return (
@@ -32,7 +34,7 @@ function SingelTodo({ todo }) {
       <div className={!todo.isDone ? "card-body" : "card-body opacity-50 "}>
         <h5 className="card-title">{todo.text}</h5>
         <h6 className="card-subtitle mb-2 text-body-secondary">
-          {todo.isDone ? "Tamam" : "Devam"}
+          {todo.isDone ? "Tamamlandi" : "Devam ediyor..."}
         </h6>
         <p className="card-text">{new Date(todo.date).toLocaleDateString()}</p>
         <a href="#" className="card-link" onClick={handleEdit}>

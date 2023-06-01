@@ -1,16 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SingelTodo from "./SingelTodo";
+import axios from "axios";
 
 function ListTodos() {
   const { todoState } = useSelector((state) => state);
 
   //console.log(todoState.todos)
   const dispatch = useDispatch()
+  
   const handleClear = ()=>{
-    dispatch({
-      type:"CLEAR",
-    })
+    todoState.todos.forEach((todo)=>{
+      axios.delete(`http://localhost:3003/todos/${todo.id}`)
+      .then(()=>{
+        dispatch({
+          type:"CLEAR",
+        })
+      })
+      })
   }
 
   return (
